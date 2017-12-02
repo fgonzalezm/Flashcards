@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  Text,
   TextInput,
   View,
   ScrollView,
@@ -61,7 +60,6 @@ class AddQuestion extends React.Component {
               underlineColorAndroid='transparent'
               placeholder='Question'
               onContentSizeChange={({nativeEvent}) => {
-                console.log('Question height', nativeEvent.contentSize.height)
                 this.setState({questionHeight: nativeEvent.contentSize.height})
               }}
               onChangeText={(question) => this.setState({question})}
@@ -73,7 +71,6 @@ class AddQuestion extends React.Component {
               value={answer}
               underlineColorAndroid='transparent'
               onContentSizeChange={({nativeEvent}) => {
-                console.log('Answer height', nativeEvent.contentSize.height)
                 this.setState({answerHeight: nativeEvent.contentSize.height})
               }}
               multiline

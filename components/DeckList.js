@@ -10,7 +10,6 @@ import {
 
 import {connect} from 'react-redux'
 import {Entypo} from '@expo/vector-icons'
-import {AppLoading} from 'expo'
 
 import colors from '../utils/colors'
 import {loadDecks} from '../actions/index'
@@ -29,21 +28,8 @@ class DeckList extends React.Component {
     }
   }
 
-  state = {
-    position: new Animated.Value(0),
-  }
-
   componentDidMount () {
     this.props.dispatch(loadDecks())
-  }
-
-  componentWillReceiveProps (nextProps) {
-    // const {decks} = this.props
-    // const nextDeck = nextProps.decks
-    //
-    // if (decks.length !== nextDeck.length) {
-    //   this.setState({positions})
-    // }
   }
 
   renderItem = ({item, index}) => {

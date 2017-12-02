@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     margin: 10
-    // position: 'absolute',
-    // bottom: 15
   },
   saveContainer: {
     flexDirection: 'row',
