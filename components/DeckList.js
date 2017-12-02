@@ -4,7 +4,8 @@ import {
   Text,
   View,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from 'react-native'
 
 import {connect} from 'react-redux'
@@ -28,28 +29,47 @@ class DeckList extends React.Component {
     }
   }
 
-
+  state = {
+    position: new Animated.Value(0),
+  }
 
   componentDidMount () {
     this.props.dispatch(loadDecks())
   }
 
-  renderItem = ({item}) => {
-    const {navigation} = this.props
+  componentWillReceiveProps (nextProps) {
+    // const {decks} = this.props
+    // const nextDeck = nextProps.decks
+    //
+    // if (decks.length !== nextDeck.length) {
+    //   this.setState({positions})
+    // }
+  }
+
+  renderItem = ({item, index}) => {
+    const {navigation, positions} = this.props
+
+    const animatedStyle = {transform: [{scale: positions[index]}]}
 
     return (
       <TouchableOpacity onPress={() => {
-        navigation.navigate('Deck', {title: item.title})
+        Animated.sequence([
+          Animated.timing(positions[index], {duration: 200, toValue: 1.04}),
+          Animated.spring(positions[index], {toValue: 1, friction: 4})
+        ]).start(() => {
+          navigation.navigate('Deck', {title: item.title})
+        })
       }} >
-        <View style={styles.itemContainer} >
+        <Animated.View style={[styles.itemContainer, animatedStyle]} >
           <Text style={styles.titleText} >
             {item.title}
           </Text>
           <Text style={styles.cardsCountText} >
             {item.questions ? item.questions.length : 0} Cards
           </Text>
-        </View>
+        </Animated.View>
         <IconOverlay
+          animatedStyle={animatedStyle}
           iconName={item.iconName}
           iconSize={30}
           iconColor={'purple'}
@@ -96,8 +116,10 @@ function mapStateToProps ({decks}) {
     decks[deck].key = deck
     return decks[deck]
   })
+  const positions = deckArray.map(() => new Animated.Value(1))
   return {
-    decks: deckArray
+    decks: deckArray,
+    positions
   }
 }
 

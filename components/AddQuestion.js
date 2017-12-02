@@ -58,6 +58,7 @@ class AddQuestion extends React.Component {
               }]}
               value={question}
               multiline
+              underlineColorAndroid='transparent'
               placeholder='Question'
               onContentSizeChange={({nativeEvent}) => {
                 console.log('Question height', nativeEvent.contentSize.height)
@@ -70,6 +71,7 @@ class AddQuestion extends React.Component {
                 height: answerHeight < 60 ? 60 : answerHeight
               }]}
               value={answer}
+              underlineColorAndroid='transparent'
               onContentSizeChange={({nativeEvent}) => {
                 console.log('Answer height', nativeEvent.contentSize.height)
                 this.setState({answerHeight: nativeEvent.contentSize.height})

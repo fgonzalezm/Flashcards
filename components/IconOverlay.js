@@ -1,15 +1,16 @@
 import React from 'react'
 import {
   StyleSheet,
-  View
+  View,
+  Animated
 } from 'react-native'
 
 import {Entypo} from '@expo/vector-icons'
 
 
-const IconOverlay = ({iconName, iconSize, iconColor}) => {
+const IconOverlay = ({iconName, iconSize, iconColor, animatedStyle}) => {
   return (
-    <View style={styles.iconOverlay} pointerEvents='none' >
+    <Animated.View style={[styles.iconOverlay, animatedStyle]} pointerEvents='none' >
       <Entypo
         style={[styles.borderIcon, styles.topLeft]}
         name={iconName}
@@ -30,7 +31,7 @@ const IconOverlay = ({iconName, iconSize, iconColor}) => {
         name={iconName}
         size={iconSize}
         color={iconColor} />
-    </View>
+    </Animated.View>
   )
 }
 

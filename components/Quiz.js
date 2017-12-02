@@ -11,6 +11,7 @@ import {connect} from 'react-redux'
 import {Entypo} from '@expo/vector-icons'
 import colors from '../utils/colors'
 import IconOverlay from './IconOverlay'
+import {clearLocalNotification, setLocalNotification} from "../utils/helpers";
 
 
 class Quiz extends React.Component {
@@ -67,6 +68,9 @@ class Quiz extends React.Component {
   }
 
   renderScore () {
+    clearLocalNotification()
+      .then(setLocalNotification)
+
     const {deck, questionsTotal} = this.props
 
     let iconName
@@ -108,7 +112,7 @@ class Quiz extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.props.navigation.goBack()}
-            style={{color: 'red'}} >
+          >
             <Text style={{fontSize: 24, color: colors.orange}} >Back to Deck</Text>
           </TouchableOpacity>
         </View>

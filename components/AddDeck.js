@@ -109,6 +109,7 @@ class AddDeck extends React.Component {
             style={styles.titleInput}
             value={title}
             placeholder='Title'
+            underlineColorAndroid='transparent'
             onChangeText={(title) => this.setState({title})}
           />
           <Text style={{marginTop: 50}}>
